@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mkdocs-intersphinx"
+version = "0.1.0"
+description = "MkDocs plugin to generate Sphinx-compatible objects.inv for intersphinx cross-referencing"
+readme = "README.md"
+authors = [
+    {name = "Free-Threading Compatibility Team"}
+]
+license = {text = "MIT"}
+requires-python = ">=3.12"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Documentation",
+    "Topic :: Software Development :: Documentation",
+]
+dependencies = [
+    "mkdocs>=1.5.0",
+    "sphobjinv>=2.3.0",
+]
+
+[project.optional-dependencies]
+tests = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Quansight-Labs/free-threaded-compatibility"
+
+[project.entry-points."mkdocs.plugins"]
+intersphinx-gen = "mkdocs_intersphinx_gen.plugin:IntersphinxGenPlugin"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["mkdocs_intersphinx_gen*"]
+exclude = ["tests*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --cov=mkdocs_intersphinx --cov-report=term-missing"
