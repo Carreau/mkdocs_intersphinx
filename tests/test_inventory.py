@@ -2,7 +2,7 @@
 
 import pytest
 from pathlib import Path
-from mkdocs_intersphinx_gen.inventory import (
+from mkdocs_intersphinx.inventory import (
     InventoryEntry,
     create_inventory,
     validate_inventory_entries,

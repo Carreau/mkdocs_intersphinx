@@ -1,7 +1,7 @@
 """Tests for parser module."""
 
 import pytest
-from mkdocs_intersphinx_gen.parser import (
+from mkdocs_intersphinx.parser import (
     extract_html_ref_comments,
     parse_markdown_headers,
     match_refs_to_headers,

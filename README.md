@@ -33,7 +33,7 @@ Add to your `mkdocs.yml`:
 ```yaml
 plugins:
   - search
-  - intersphinx-gen:
+  - intersphinx:
       enabled: true
       project: "My Project"
       version: "latest"
@@ -134,7 +134,7 @@ pytest
 ### Test Coverage
 
 ```bash
-pytest --cov=mkdocs_intersphinx_gen --cov-report=html
+pytest --cov=mkdocs_intersphinx --cov-report=html
 ```
 
 ## How It Works

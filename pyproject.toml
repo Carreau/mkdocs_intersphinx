@@ -1,6 +1,6 @@
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["flit_core>=3.2,<4"]
+build-backend = "flit_core.buildapi"
 
 [project]
 name = "mkdocs-intersphinx"
@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "MkDocs plugin to generate Sphinx-compatible objects.inv for intersphinx cross-referencing"
 readme = "README.md"
 authors = [
-    {name = "Free-Threading Compatibility Team"}
+    {name = "M Bussonnier"}
 ]
 license = {text = "MIT"}
 requires-python = ">=3.12"
@@ -26,22 +26,31 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-tests = [
+dev = [
     "pytest>=7.0",
     "pytest-cov>=4.0",
+    "mypy>=1.0",
 ]
 
 [project.urls]
-Homepage = "https://github.com/Quansight-Labs/free-threaded-compatibility"
+Homepage = "https://github.com/carreau/mkdocs_intersphinx"
 
 [project.entry-points."mkdocs.plugins"]
-intersphinx-gen = "mkdocs_intersphinx_gen.plugin:IntersphinxGenPlugin"
-
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["mkdocs_intersphinx_gen*"]
-exclude = ["tests*"]
+intersphinx = "mkdocs_intersphinx.plugin:IntersphinxPlugin"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-v --cov=mkdocs_intersphinx --cov-report=term-missing"
+addopts = "-v --cov=mkdocs_intersphinx --cov-report=term-missing --cov-report=xml"
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+strict_equality = true
