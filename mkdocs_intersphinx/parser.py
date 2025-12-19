@@ -134,7 +134,8 @@ def generate_anchor_id(header_text: str) -> str:
     """
     anchor = header_text.lower()
     anchor = re.sub(r'\s+', '-', anchor)
-    anchor = re.sub(r'[^\w\-]', '', anchor)
+    # Keep only ASCII word characters and hyphens (removes non-ASCII characters)
+    anchor = re.sub(r'[^a-z0-9_\-]', '', anchor)
     anchor = anchor.strip('-')
     anchor = re.sub(r'-+', '-', anchor)
 
