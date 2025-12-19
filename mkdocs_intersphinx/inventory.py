@@ -25,8 +25,6 @@ class InventoryEntry:
         """Validate entry data."""
         if not self.name:
             raise ValueError("Entry name cannot be empty")
-        if not self.uri:
-            raise ValueError("Entry URI cannot be empty")
         if self.priority not in (-1, 1):
             logger.warning(f"Unusual priority {self.priority} for {self.name}")
 

@@ -164,6 +164,9 @@ class IntersphinxPlugin(BasePlugin):
         if not self.config['enabled']:
             return
 
+        # Add automatic index entry if not already present
+        self._add_index_entry()
+
         if not self.inventory_entries:
             self._logger.warning("No inventory entries collected. objects.inv will be empty.")
             return
@@ -272,6 +275,32 @@ class IntersphinxPlugin(BasePlugin):
             self._logger.debug(
                 f"Added header entry: {ref.name} -> {uri}"
             )
+
+    def _add_index_entry(self) -> None:
+        """
+        Add automatic inventory entry for the index/root page.
+
+        Creates an entry named "index" pointing to the root of the website
+        if one doesn't already exist.
+        """
+        # Check if an index entry already exists
+        if any(entry.name == 'index' for entry in self.inventory_entries):
+            self._logger.debug("Index entry already exists, skipping automatic creation")
+            return
+
+        # Create automatic index entry, using / for root URL
+        entry = InventoryEntry(
+            name='index',
+            domain=self.config['domain'],
+            role=self.config['page_role'],
+            priority=1,
+            uri='',
+            display_name='Index'
+        )
+
+        self.inventory_entries.append(entry)
+
+        self._logger.debug("Added automatic index entry: index -> /")
 
     def _find_anchor_from_toc(self, page: Page, header_text: str) -> Optional[str]:
         """
