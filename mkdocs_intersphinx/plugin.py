@@ -49,7 +49,7 @@ class IntersphinxPlugin(BasePlugin):
         ('verbose', config_options.Type(bool, default=False)),
     )
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.inventory_entries: List[InventoryEntry] = []
         self._logger = logging.getLogger('mkdocs.plugins.intersphinx')
@@ -316,7 +316,7 @@ class IntersphinxPlugin(BasePlugin):
         if not hasattr(page, 'toc') or not page.toc:
             return None
 
-        def search_toc_items(items):
+        def search_toc_items(items: Any) -> Optional[str]:
             for item in items:
                 if hasattr(item, 'title') and item.title == header_text:
                     return item.id if hasattr(item, 'id') else None
