@@ -52,17 +52,6 @@ class TestInventoryEntry:
                 display_name="Test"
             )
 
-    def test_empty_uri_raises_error(self):
-        with pytest.raises(ValueError, match="URI cannot be empty"):
-            InventoryEntry(
-                name="test",
-                domain="std",
-                role="doc",
-                priority=1,
-                uri="",
-                display_name="Test"
-            )
-
 
 class TestValidateInventoryEntries:
     """Tests for inventory validation."""

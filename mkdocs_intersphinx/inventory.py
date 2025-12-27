@@ -6,7 +6,7 @@ from typing import List
 import logging
 import re
 
-from sphobjinv import Inventory, DataObjStr, writebytes, compress
+from sphobjinv import Inventory, DataObjStr, writebytes, compress  # type: ignore[import-untyped]
 
 logger = logging.getLogger('mkdocs.plugins.intersphinx')
 
@@ -21,12 +21,10 @@ class InventoryEntry:
     uri: str               # Relative URI (e.g., 'porting.html#atomic-ops')
     display_name: str      # Display text (e.g., 'Atomic Operations')
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Validate entry data."""
         if not self.name:
             raise ValueError("Entry name cannot be empty")
-        if not self.uri:
-            raise ValueError("Entry URI cannot be empty")
         if self.priority not in (-1, 1):
             logger.warning(f"Unusual priority {self.priority} for {self.name}")
 
@@ -120,7 +118,7 @@ def validate_inventory_entries(entries: List[InventoryEntry]) -> List[str]:
     issues = []
 
     # Check for duplicate names
-    names = {}
+    names: dict[str, str] = {}
     for entry in entries:
         if entry.name in names:
             issues.append(

@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "mkdocs-intersphinx"
-version = "0.1.0"
+dynamic = ["version"]
 description = "MkDocs plugin to generate Sphinx-compatible objects.inv for intersphinx cross-referencing"
 readme = "README.md"
 authors = [
@@ -54,3 +54,7 @@ warn_redundant_casts = true
 warn_unused_ignores = true
 warn_no_return = true
 strict_equality = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
